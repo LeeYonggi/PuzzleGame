@@ -61,26 +61,43 @@ public class NodeManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         SwipeObject();
-        
     }
 
+    bool IsSwipe()
+    {
+        if (m_Swipe.SwipeLeft)
+        {
+            desiredPosition = Vector3.left;
+            return true;
+        }
+        if (m_Swipe.SwipeRight)
+        {
+            desiredPosition = Vector3.right;
+            return true;
+        }
+        if (m_Swipe.SwipeUp)
+        {
+            desiredPosition = Vector3.up;
+            return true;
+        }
+        if (m_Swipe.SwipeDown)
+        {
+            desiredPosition = Vector3.down;
+            return true;
+        }
+        desiredPosition = Vector3.zero;
+        return false;
+    }
 
     void SwipeObject()
     {
-        //desiredPosition = Vector3.zero;
-        if (m_Swipe.SwipeLeft)
-            desiredPosition += Vector3.left;
-        if (m_Swipe.SwipeRight)
-            desiredPosition += Vector3.right;
-        if (m_Swipe.SwipeUp)
-            desiredPosition += Vector3.up;
-        if (m_Swipe.SwipeDown)
-            desiredPosition += Vector3.down;
+        if(IsSwipe())
+        {
+            nodeArr[1][1].obj.transform.position = Vector3.MoveTowards(nodeArr[1][1].obj.transform.position, desiredPosition, 3f * Time.deltaTime);
+        }
 
         //testobj.transform.position = Vector3.MoveTowards(testobj.transform.position, desiredPosition, 3f * Time.deltaTime);
-        nodeArr[1][1].obj.transform.position = Vector3.MoveTowards(nodeArr[1][1].obj.transform.position, desiredPosition, 3f * Time.deltaTime);
 
         if (m_Swipe.Tap)
             Debug.Log("Tapp!");

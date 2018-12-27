@@ -76,7 +76,6 @@ public class Swipe : MonoBehaviour {
                     swipeDown = true;
                 else
                     swipeUp = true;
-
             }
 
             Reset();
