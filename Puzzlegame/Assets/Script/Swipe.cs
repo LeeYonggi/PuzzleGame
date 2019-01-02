@@ -7,10 +7,11 @@ public class Swipe : MonoBehaviour {
     private bool tap, swipeLeft, swipeRight, swipeUp, swipeDown;
     private bool isDraging = false;
     private Vector2 startTouch, swipeDelta;
+    private bool isSwipeing = false;
 
     private void Update()
     {
-        tap = swipeLeft = swipeRight = swipeUp = swipeDown = false;
+        tap = swipeLeft = swipeRight = swipeUp = swipeDown = isSwipeing = false;
 
         #region Standalone Inputs
         if(Input.GetMouseButtonDown(0))
@@ -61,8 +62,9 @@ public class Swipe : MonoBehaviour {
             //which direction?
             float x = swipeDelta.x;
             float y = swipeDelta.y;
+            isSwipeing = true;
 
-            if(Mathf.Abs(x) > Mathf.Abs(y))
+            if (Mathf.Abs(x) > Mathf.Abs(y))
             {
                 //Left or right
                 if (x < 0)
@@ -94,6 +96,7 @@ public class Swipe : MonoBehaviour {
     public bool SwipeRight  { get { return swipeRight; } }
     public bool SwipeUp    { get { return swipeUp; } }
     public bool SwipeDown   { get { return swipeDown; } }
-    
+    public bool IsSwipeing { get { return isSwipeing; } }
+
 
 }
